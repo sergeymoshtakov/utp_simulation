@@ -18,11 +18,24 @@ def compute_forces(aircraft):
         -LIFT_COEFF * speed**2
     ])
 
-    return thrust + drag + lift + weight
+    return {
+        "thrust": thrust,
+        "drag": drag,
+        "lift": lift,
+        "weight": weight
+    }
 
 def integrate(aircraft, dt):
-    F = compute_forces(aircraft)
-    aircraft.acc = F / PLANE_MASS
+    forces = compute_forces(aircraft)
+
+    total_force = (
+        forces["thrust"]
+        + forces["drag"]
+        + forces["lift"]
+        + forces["weight"]
+    )
+
+    aircraft.acc = total_force / PLANE_MASS
     aircraft.vel += aircraft.acc * dt
     aircraft.pos + aircraft.vel * dt;
 
@@ -30,3 +43,5 @@ def integrate(aircraft, dt):
         aircraft.pos[1] = GROUND_Y
         if aircraft.vel[1] > 0:
             aircraft.vel[1] = 0
+
+    return forces

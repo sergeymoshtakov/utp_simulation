@@ -1,10 +1,12 @@
 import pygame
-
+import numpy as np
 from aircraft import Aircraft
 from physics import integrate
 from constants import *
 
 pygame.init()
+
+font = pygame.font.SysFont(None, 28)
 
 WIDTH = 1200
 HEIGHT = 700
@@ -26,7 +28,7 @@ while running:
         if event.type == pygame.QUIT:
             running = False
 
-    integrate(aircraft, dt)
+    forces = integrate(aircraft, dt)
 
     screen.fill((30, 30, 40))
 
@@ -50,6 +52,33 @@ while running:
             (x - 20, y + 10)
         ]
     )
+
+    # print forces
+
+    speed = np.linalg.norm(aircraft.vel)
+    lift_force = abs(forces["lift"][1])
+    weight_force = abs(forces["weight"][1])
+    drag_force = np.linalg.norm(forces["drag"])
+    thrust_force = np.linalg.norm(forces["thrust"])
+    altitude = GROUND_Y - aircraft.pos[1]
+
+    lines = [
+        f"Speed: {speed:.1f} m/s",
+        f"Altitude: {altitude:.1f} m",
+        f"Thrust: {thrust_force:.0f} N",
+        f"Drag: {drag_force:.0f} N",
+        f"Lift: {lift_force:.0f} N",
+        f"Weight: {weight_force:.0f} N",
+    ]
+    
+    for i, line in enumerate(lines):
+
+        text = font.render(line, True, (255,255,255))
+
+        screen.blit(
+            text,
+            (20, 20 + i * 30)
+        )
 
     pygame.display.flip()
 
