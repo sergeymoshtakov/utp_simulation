@@ -37,7 +37,7 @@ def integrate(aircraft, dt):
 
     aircraft.acc = total_force / PLANE_MASS
     aircraft.vel += aircraft.acc * dt
-    aircraft.pos + aircraft.vel * dt;
+    aircraft.pos += aircraft.vel * dt;
 
     if aircraft.pos[1] > GROUND_Y:
         aircraft.pos[1] = GROUND_Y
