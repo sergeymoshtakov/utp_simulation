@@ -6,6 +6,8 @@ from constants import *
 
 pygame.init()
 
+pygame.display.set_caption("2D Aircraft Physics Simulation")
+
 font = pygame.font.SysFont(None, 28)
 
 WIDTH = 1200
