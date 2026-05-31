@@ -1,1 +1,1 @@
-# space_ship
+# Python aircraft physics simulation
