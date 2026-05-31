@@ -5,3 +5,5 @@ DRAG_COEFF = 0.02
 LIFT_COEFF = 0.4
 AIR_DENSITY = 1.225 # kg/m^3
 GROUND_Y = 500.0 # m
+SCALE = 0.3 # pixel / m
+GROUND_OFFSET_Y = 550 # pixels

@@ -11,6 +11,8 @@ font = pygame.font.SysFont(None, 28)
 WIDTH = 1200
 HEIGHT = 700
 
+SCREEN_GROUND_Y = GROUND_OFFSET_Y
+
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
 
 clock = pygame.time.Clock()
@@ -35,13 +37,13 @@ while running:
     pygame.draw.line(
         screen,
         (0, 255, 0),
-        (0, GROUND_Y),
-        (WIDTH, GROUND_Y),
+        (0, SCREEN_GROUND_Y),
+        (WIDTH, SCREEN_GROUND_Y),
         3
     )
 
-    x = int(aircraft.pos[0])
-    y = int(aircraft.pos[1])
+    x = int(aircraft.pos[0] * SCALE)
+    y = int((aircraft.pos[1] - GROUND_Y) * SCALE + GROUND_OFFSET_Y)
 
     pygame.draw.polygon(
         screen,
